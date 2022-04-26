@@ -64,7 +64,7 @@ class StudentController extends AbstractController
             $this->addFlash('success', 'Student added successfully');
             return $this->redirectToRoute('student_index');
         }
-        return $this->render('student/add.html.twig', [
+        return $this->renderForm('student/add.html.twig', [
             'studentForm' => $form,
             'subjects' => $subjects
         ]);
@@ -102,7 +102,7 @@ class StudentController extends AbstractController
             $this->addFlash('success', 'Student edited successfully');
             return $this->redirectToRoute('student_index');
         }
-        return $this->render('student/edit.html.twig', [
+        return $this->renderForm('student/edit.html.twig', [
             'studentForm' => $form,
             'subjects' => $subjects
         ]);
