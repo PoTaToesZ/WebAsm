@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid col-md-8 text-center">
+    <br>
+    <h1 class="text-nowrap bd-highlight" style="color: CadetBlue">Classes List</h1>
+    <br>
+    <table class="table table-striped">
+        <tr style="border-color: #96D4D4">
+            <th style="color: Tomato">ID</th>
+            <th style="color: Tomato">Name</th>
+            <th style="color: Tomato">StartDate</th>
+            <th style="color: Tomato">EndDate</th>
+            <th style="color: Tomato">Action</th>
+        </tr>
+            {% for classes in classess %}
+        <tr>
+            <td>{{classes.id}}</td>
+            <td>{{classes.name}}</td>
+            <td>{{classes.startDate}}</td>
+            <td>{{classes.endDate}}</td>
+            <td>
+                <a class="btn btn-outline-primary" href="{{path('classes_edit', {'id': major.id})}}">Edit</a>
+                <br><br>
+                <a class="btn btn-outline-danger" href="{{path('classes_delete', {'id': major.id})}}" onclick="return confirm('Are you sure you want to delete this classes')">Delete</a>
+            </td>
+        </tr>
+            {% endfor %}
+    </table>
+    <br>
+    <a class="btn btn-outline-danger" href="{{ path('classes_add') }}" >Add New Classes</a>
+</div>
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid col-md-8 text-center">
+    <br>
+    <h1 class="text-nowrap bd-highlight" style="color: LightPink">Teacher List</h1>
+    <br>
+    <table class="table table-striped table-bordered">
+        <tr style="border-color: #96D4D4">
+            <th style= "color: Crimson">ID</th>
+            <th style= "color: Crimson">Name</th>
+            <th style= "color: Crimson">birthday</th>
+            <th style= "color: Crimson">Classes</th>
+            <th style= "color: Crimson">Email</th>
+            <th style= "color: Crimson">Action</th>
+        </tr>
+            {% for teacher in teachers %}
+        <tr>
+            <td>{{teacher.id}}</td>
+            <td>{{teacher.name}}</td>
+            <td>{{teacher.birthday}}</td>
+            <th>
+                {% if teacher.classes != null %}
+                    <a class="text text-shadow:4px 4px 8px blue;" href="{{path('classes_detail', {'id' : teacher.classes.id})}}">{{teacher.classes.name}}</a>
+                {% endif %}
+            </th>
+            <td>{{teacher.email}}</td>
+            <td>
+                <a class="btn btn-outline-primary" href="{{path('teacher_edit', {'id': teacher.id})}}">Edit</a>
+                <br><br>
+                <a class="btn btn-outline-danger" href="{{path('teacher_delete', {'id': teacher.id})}}" onclick="return confirm('Are you sure you want to delete this teacher')">Delete</a>
+            </td>
+        </tr>
+            {% endfor %}
+    </table>
+    <br>
+    <a class="btn btn-outline-danger" href="{{ path('teacher_add') }}" >Add New Teacher</a>
+</div>
+{% endblock %}
