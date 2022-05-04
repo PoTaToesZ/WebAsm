@@ -44,7 +44,7 @@ class StudentController extends AbstractController
             $manager = $registry->getManager();
             $manager->persist($student);
             $manager->flush();
-            $this->addFlash('success', 'Student added successfully');
+            $this->addFlash('Success', 'Student added successfully');
             return $this->redirectToRoute('student_index');
         }
         return $this->renderForm('student/add.html.twig', [
@@ -60,7 +60,7 @@ class StudentController extends AbstractController
         $student = $registry->getRepository(Student::class)->find($id);
         $majors = $registry->getRepository(Major::class)->findAll();
         if ($student == null){
-            $this ->addFlash('error', 'Student not found');
+            $this ->addFlash('Error', 'Student not found');
             return $this->redirectToRoute('student_index');
         }
         return $this->render('student/detail.html.twig', [
@@ -81,7 +81,7 @@ class StudentController extends AbstractController
             $manager = $registry->getManager();
             $manager->persist($student);
             $manager->flush();
-            $this->addFlash('success', 'Student edited successfully');
+            $this->addFlash('Success', 'Student edited successfully');
             return $this->redirectToRoute('student_index');
         }
         return $this->renderForm('student/edit.html.twig', [
@@ -102,7 +102,7 @@ class StudentController extends AbstractController
             $manager = $registry->getManager();
             $manager->remove($student);
             $manager->flush();
-            $this->addFlash('success', 'Student deleted successfully');
+            $this->addFlash('Success', 'Student deleted successfully');
         }
         return $this->redirectToRoute('student_index', [
             'majors' => $majors,
