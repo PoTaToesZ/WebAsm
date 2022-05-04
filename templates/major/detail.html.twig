@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container-fluid col-md-8 text-center">
+    <h1 class="fst-italic">{{major.name}}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <img src = "{{major.image}}" width = 150 height = 250>
+        </div>
+        <div class="col-md-6">
+            <p>{{major.description}}</p>
+        <br>
+        <div class="col-md-6">
+            <h4 style="color: crimson">Quantity: {{major.quantity}}</h3>
+        </div>
+        <div class="col-md-6">
+        <br>
+        <h3>Major List</h3>
+            {% if major.students != null %}
+                {% for student in major.students %}
+                    <a class="text-nowrap bd-highlight" style="width: 8rem;" href="{{path('student_detail', {id: student.id})}}">{{student.name}}</a>
+                    <br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

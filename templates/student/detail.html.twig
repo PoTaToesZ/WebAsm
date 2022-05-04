@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container table-responsive-xl">
+    <h2 class="fst-italic">Student Name: {{student.name}}</h2>
+        <div class="row">
+            <div class="col">
+                <img src="{{student.image}}" width = 300 height= 200>
+            </div>
+            <div class="col">
+                <h4>Age: {{student.age}}</h4>
+                <br>
+                <h3 class="fst-italic">Email: {{student.email}}</h3> 
+                <br>
+                <h3 class="text">Address: {{student.address}}</h3>
+                <br>
+                <h3 class="text">Major:
+                    {% if student.major != null %}
+                    <a href="{{path('major_detail', {'id': student.major.id})}}">{{student.major.name}}</a>
+                    {% endif %}
+                </h3>
+                <br>
+                <h5 class="text-justify">Date of Birth: {{student.dob | date('d/m/Y')}}</h5>
+            </div>
+        </div>
+    </div>
+{% endblock %}

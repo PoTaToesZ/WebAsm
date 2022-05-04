@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body style="background-color:LightCyan">
+            {# navigation bar #}
+        {% block nav %}
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="{{path('home')}}" style="color: Violet">StudentManagement</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{path('home')}}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{path('student_index')}}" style="color:OrangeRed">Student</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{path('major_index')}}" style="color:Sienna">Major</a>
+        </li>
+        </ul>
+        </div>
+        <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color:Coral">{{ app.user.username }}</a>
+                        <a href="{{path('app_logout')}}"  class="dropdown-item">Logout</a>
+                        
+                    </li>
+                </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block flash %}
+<div class="container-md col-md-5 mt-3 text-center">
+    {% for message in app.session.flashBag.get('Success') %}
+        <p class="alert alert-success">{{ message }}</p> 
+            {% endfor %}
+            {% for message in app.session.flashBag.get('Error') %}
+        <p class="alert alert-danger">{{ message }}</p> 
+            {% endfor %}
+</div>
+    {% endblock %}
+
+        {% block body %}{% endblock %}
+    </body>
+</html>

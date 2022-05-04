@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid col-md-8 text-center">
+    <br>
+    <h1 class="text-nowrap bd-highlight" style="color: LightPink">Student List</h1>
+    <br>
+    <table class="table table-striped table-bordered">
+        <tr style="border-color: #96D4D4">
+            <th style= "color: Crimson">ID</th>
+            <th style= "color: Crimson">Name</th>
+            <th style= "color: Crimson">Image</th>
+            <th style= "color: Crimson">Age</th>
+            <th style= "color: Crimson">Major</th>
+            <th style= "color: Crimson">Email</th>
+            <th style= "color: Crimson">Address</th>
+            <th style= "color: Crimson">Action</th>
+        </tr>
+            {% for student in students %}
+        <tr>
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>
+                <a href="{{path('student_detail', {'id': student.id})}}">
+                    <img src="{{student.image}}" width= 200 height= 200>
+                </a>
+            </td>
+            <td>{{student.age}}</td>
+            <th>
+                {% if student.major != null %}
+                    <a class="text text-shadow:4px 4px 8px blue;" href="{{path('major_detail', {'id' : student.major.id})}}">{{student.major.name}}</a>
+                {% endif %}
+            </th>
+            <td>{{student.email}}</td>
+            <td>{{student.address}}</td>
+            <td>
+                <a class="btn btn-outline-primary" href="{{path('student_edit', {'id': student.id})}}">Edit</a>
+                <br><br>
+                <a class="btn btn-outline-danger" href="{{path('student_delete', {'id': student.id})}}" onclick="return confirm('Are you sure you want to delete this student')">Delete</a>
+            </td>
+        </tr>
+            {% endfor %}
+    </table>
+    <br>
+    <a class="btn btn-outline-danger" href="{{ path('student_add') }}" >Add New Student</a>
+</div>
+{% endblock %}

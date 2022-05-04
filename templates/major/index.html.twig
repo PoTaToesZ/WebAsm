@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid col-md-8 text-center">
+    <br>
+    <h1 class="text-nowrap bd-highlight" style="color: CadetBlue">Major List</h1>
+    <br>
+    <table class="table table-striped">
+        <tr style="border-color: #96D4D4">
+            <th style="color: Tomato">ID</th>
+            <th style="color: Tomato">Name</th>
+            <th style="color: Tomato">Image</th>
+            <th style="color: Tomato">Description</th>
+            <th style="color: Tomato">Action</th>
+        </tr>
+            {% for major in majors %}
+        <tr>
+            <td>{{major.id}}</td>
+            <td>{{major.name}}</td>
+            <td>
+                <a href="{{path('major_detail',{id: major.id})}}">
+                    <img src="{{major.image}}" width = 150 height = 250>
+                </a>
+            </td>
+            <td>{{major.description}}</td>
+            <td>
+                <a class="btn btn-outline-primary" href="{{path('major_edit', {'id': major.id})}}">Edit</a>
+                <br><br>
+                <a class="btn btn-outline-danger" href="{{path('major_delete', {'id': major.id})}}" onclick="return confirm('Are you sure you want to delete this major')">Delete</a>
+            </td>
+        </tr>
+            {% endfor %}
+    </table>
+    <br>
+    <a class="btn btn-outline-danger" href="{{ path('major_add') }}" >Add New Major</a>
+</div>
+{% endblock %}
+
