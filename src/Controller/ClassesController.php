@@ -80,22 +80,19 @@ class ClassesController extends AbstractController
         ]);
     } 
 
-    /**
+    /** 
      * @Route("delete/{id}", name="classes_delete")
-     */
+    */
     public function classesDelete(ManagerRegistry $registry, $id){
         $classes = $registry->getRepository(Classes::class)->find($id);
         if ($classes == null){
             $this ->addFlash('Error', 'classes not found');
-        }else if (count($classes->getStudent()) >= 1){
-            $this ->addFlash('Error', 'Can not delete!');
+            return $this->redirectToRoute('classes_index');
         }
-        {
-            $manager = $registry->getManager();
-            $manager->remove($classes);
-            $manager->flush();
-            $this->addFlash('Success', 'classes deleted successfully');
-        }
+        $manager = $registry->getManager();
+        $manager->remove($classes);
+        $manager->flush();
+        $this->addFlash('Success', 'classes deleted successfully');
         return $this->redirectToRoute('classes_index');
     }
 }

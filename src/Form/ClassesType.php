@@ -20,7 +20,7 @@ class ClassesType extends AbstractType
                 'label' => 'Class Name',
                 'required' => true,
                 'attr' => [
-                    'minlength' => 5,
+                    'minlength' => 4,
                     'maxlength' => 50,
                 ]
             ])
