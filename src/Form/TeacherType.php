@@ -46,7 +46,7 @@ class TeacherType extends AbstractType
                 'required' => true,
                 'class' => Classes::class,
                 'choice_label' => 'name',
-                'multiple' => false,
+                'multiple' => true,
                 'expanded' => false,
             ])
             ->add('Save', SubmitType::class);
