@@ -18,7 +18,7 @@
         <tr>
             <td>{{teacher.id}}</td>
             <td>{{teacher.name}}</td>
-            <td>{{teacher.birthday}}</td>
+            <td>{{teacher.birthday | date('d/m/Y')}}</td>
             <th>
                 {% if teacher.classes != null %}
                     <a class="text text-shadow:4px 4px 8px blue;" href="{{path('classes_detail', {'id' : teacher.classes.id})}}">{{teacher.classes.name}}</a>

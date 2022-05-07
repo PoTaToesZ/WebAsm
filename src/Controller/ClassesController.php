@@ -53,7 +53,7 @@ class ClassesController extends AbstractController
     public function classesDetail(ManagerRegistry $registry, $id){
         $classes = $registry->getRepository(Classes::class)->find($id);
         if ($classes == null){
-            $this ->addFlash('Error', 'classes not found');
+            $this ->addFlash('Error', 'Classes not found');
             return $this->redirectToRoute('classes_index');
         }
         return $this->render('classes/detail.html.twig', [

@@ -36,7 +36,7 @@ class TeacherController extends AbstractController
      * @Route("add", name="teacher_add")
      */
     public function teacherAdd(ManagerRegistry $registry, Request $request){
-        $classess = $registry->getRepository(Classes::class)->findAll();
+        $classes = $registry->getRepository(Classes::class)->findAll();
         $teacher = new Teacher();
         $form = $this->createForm(TeacherType::class, $teacher);
         $form->handleRequest($request);
@@ -49,7 +49,7 @@ class TeacherController extends AbstractController
         }
         return $this->renderForm('teacher/add.html.twig', [
             'teacherForm' => $form,
-            'classess' => $classess,
+            'classes' => $classes,
         ]);
     }
 
