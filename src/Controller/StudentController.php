@@ -108,4 +108,96 @@ class StudentController extends AbstractController
             'majors' => $majors,
         ]);
     }
+
+    /** 
+     * @Route("asc/", name="student_asc")
+     */
+    public function studentAsc(ManagerRegistry $registry){
+        $students = $registry->getRepository(Student::class)->findBy([], ['age' => 'ASC']);
+        $majors = $registry->getRepository(Major::class)->findAll();
+        return $this->render('student/index.html.twig', [
+            'students' => $students,
+            'majors' => $majors,
+        ]);
+}
+    
+    /** 
+     *@Route("desc/", name="student_desc")
+     */
+    public function studentDesc(ManagerRegistry $registry){
+        $students = $registry->getRepository(Student::class)->findBy([], ['age' => 'DESC']);
+        $majors = $registry->getRepository(Major::class)->findAll();
+        return $this->render('student/index.html.twig', [
+            'students' => $students,
+            'majors' => $majors,
+        ]);
+    }
+
+    /**
+     * @Route("search/", name="student_search")
+     */
+    public function searchStudent(ManagerRegistry $registry, Request $request, StudentRepository $studentRepository){
+        $students = $registry->getRepository(Major::class)->findAll();
+        $keyword = $request->get('keyword');
+        $students = $studentRepository->searchStudent($keyword);
+        return $this->render('student/index.html.twig',[
+            'students' => $students,
+            'majors' => $students,
+        ]);
+    }
+    /** 
+     * @Route("filter/{id}", name="student_filter")
+     */
+    public function filterStudent(ManagerRegistry $registry, $id){
+        $students = $registry->getRepository(Student::class)->findAll();
+        $majors = $registry->getRepository(Major::class)->findAll();
+        $students = $registry->getRepository(Student::class)->findBy(['major' => $id]);
+        return $this->render('student/index.html.twig', [
+            'students' => $students,
+            'majors' => $majors,
+        ]);
+    }
+    /**
+     * @Route("name/asc", name="student_name_asc")
+     */
+    public function studentNameAsc(ManagerRegistry $registry){
+        $students = $registry->getRepository(Student::class)->findBy([], ['name' => 'ASC']);
+        $majors = $registry->getRepository(Major::class)->findAll();
+        return $this->render('student/index.html.twig', [
+            'students' => $students,
+            'majors' => $majors,
+        ]);
+    }
+    /** 
+     * @Route("name/desc", name="student_name_desc")
+     */
+
+    public function studentNameDesc(ManagerRegistry $registry){
+        $students = $registry->getRepository(Student::class)->findBy([], ['name' => 'DESC']);
+        $majors = $registry->getRepository(Major::class)->findAll();
+        return $this->render('student/index.html.twig', [
+            'students' => $students,
+            'majors' => $majors,
+        ]);
+    }
+    //Check if major quantity is enough for 3 student
+    //If major quantity <3 cannot add more student
+    /**
+     * @Route("major/{id}", name="student_major")
+     */
+    public function studentMajor(ManagerRegistry $registry, $id){
+        $students = $registry->getRepository(Student::class)->findAll();
+        $majors = $registry->getRepository(Major::class)->findAll();
+        $students = $registry->getRepository(Student::class)->findBy(['major' => $id]);
+        $major = $registry->getRepository(Major::class)->find($id);
+        if ($major->getQuantity() < 3){
+            $this->addFlash('Error', 'Major quantity is not enough');
+            return $this->redirectToRoute('student_index');
+        }
+        return $this->render('student/index.html.twig', [
+            'students' => $students,
+            'majors' => $majors,
+        ]);
+    }
+    
 }

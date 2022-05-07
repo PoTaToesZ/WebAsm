@@ -83,19 +83,20 @@ class MajorController extends AbstractController
     /**
      * @Route("delete/{id}", name="major_delete")
      */
-    public function majorDelete(ManagerRegistry $registry, $id){
+    public function majorDelete (ManagerRegistry $registry, $id) {
         $major = $registry->getRepository(Major::class)->find($id);
-        if ($major == null){
-            $this ->addFlash('Error', 'Major not found');
-        }else if (count($major->getStudent()) >= 1){
-            $this ->addFlash('Error', 'Can not delete!');
+        if ($major == null) {
+            $this->addFlash("Error", "Major not found !");
         }
-        {
+        else if (count($major->getStudents()) >= 1) {
+            $this->addFlash("Error", "Can not delete this major !");
+        }
+        else {
             $manager = $registry->getManager();
             $manager->remove($major);
             $manager->flush();
-            $this->addFlash('Success', 'Major deleted successfully');
+            $this->addFlash("Success", "Delete major succeed !");
         }
-        return $this->redirectToRoute('major_index');
+        return $this->redirectToRoute("major_index");
     }
 }

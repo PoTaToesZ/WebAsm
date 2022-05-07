@@ -49,7 +49,7 @@ class TeacherController extends AbstractController
         }
         return $this->renderForm('teacher/add.html.twig', [
             'teacherForm' => $form,
-            'classes' => $classess,
+            'classess' => $classess,
         ]);
     }
 

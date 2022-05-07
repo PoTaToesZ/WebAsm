@@ -8,9 +8,21 @@
     <table class="table table-striped table-bordered">
         <tr style="border-color: #96D4D4">
             <th style= "color: Crimson">ID</th>
-            <th style= "color: Crimson">Name</th>
+            <th style= "color: Crimson">Name
+            <select onchange="window.location.href=this.value">
+                <option>Sort Name</option>
+                <option value="{{ path('student_name_asc') }}">Ascending</option>
+                <option value="{{ path('student_name_desc') }}">Descending</option>
+            </select>
+            </th>
             <th style= "color: Crimson">Image</th>
-            <th style= "color: Crimson">Age</th>
+            <th style= "color: Crimson"> Age
+            <select onchange="window.location.href=this.value">
+                    <option>Sort</option>
+                    <option value="{{ path('student_asc')}}">Ascending</option>
+                    <option value="{{ path('student_desc')}}">Descending</option>
+                </select> 
+            </th>
             <th style= "color: Crimson">Major</th>
             <th style= "color: Crimson">Email</th>
             <th style= "color: Crimson">Address</th>
@@ -42,6 +54,6 @@
             {% endfor %}
     </table>
     <br>
-    <a class="btn btn-outline-danger" href="{{ path('student_add') }}" >Add New Student</a>
+    <a class="btn btn-outline-primary" href="{{path('student_add')}}">Add New Student</a>
 </div>
 {% endblock %}
