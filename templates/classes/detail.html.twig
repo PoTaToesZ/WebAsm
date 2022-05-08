@@ -5,16 +5,16 @@
     <h1 class="fst-italic">{{classes.name}}</h1>
     <div class="row">
         <div class="col-md-6">
-            <h5 class="text-justify">StartDate: {{classes.startDate | date('d/m/Y')}}</h5>
+            <h5 class="text-justify">StartDate: {{classes.start | date('d/m/Y')}}</h5>
         <br>
         <div class="col-md-6">
-            <h5 class="text-justify">EndDate: {{classes.endDate | date('d/m/Y')}}</h5>
+            <h5 class="text-justify">EndDate: {{classes.end | date('d/m/Y')}}</h5>
         </div>
         <div class="col-md-6">
         <br>
         <h3>Classes List</h3>
-            {% if classes.teachers != null %}
-                {% for teacher in classes.teachers %}
+            {% if classes.teacher != null %}
+                {% for teacher in classes.teacher %}
                     <a class="text-nowrap bd-highlight" style="width: 8rem;" href="{{path('teacher_detail', {id: teacher.id})}}">{{teacher.name}}</a>
                     <br>
                 {% endfor %}

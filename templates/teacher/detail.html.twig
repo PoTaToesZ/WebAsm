@@ -8,9 +8,7 @@
                 <h3 class="fst-italic">Email: {{teacher.email}}</h3> 
                 <br>
                 <h3 class="text">Classes:
-                    {% if teacher.classes != null %}
-                    <a href="{{path('classes_detail', {'id': teacher.classes.id})}}">{{teacher.classes.name}}</a>
-                    {% endif %}
+                    WebG301
                 </h3>
                 <br>
                 <h5 class="text-justify">Date of Birth: {{teacher.birthday | date('d/m/Y')}}</h5>

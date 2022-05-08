@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Doctrine\ORM\PersistenceCollection;
 
 /**
  * @Route("/teacher")
@@ -36,7 +37,7 @@ class TeacherController extends AbstractController
      * @Route("add", name="teacher_add")
      */
     public function teacherAdd(ManagerRegistry $registry, Request $request){
-        $classes = $registry->getRepository(Classes::class)->findAll();
+        $classess = $registry->getRepository(Classes::class)->findAll();
         $teacher = new Teacher();
         $form = $this->createForm(TeacherType::class, $teacher);
         $form->handleRequest($request);
@@ -49,7 +50,7 @@ class TeacherController extends AbstractController
         }
         return $this->renderForm('teacher/add.html.twig', [
             'teacherForm' => $form,
-            'classes' => $classes,
+            'classess' => $classess,
         ]);
     }
 
@@ -60,7 +61,7 @@ class TeacherController extends AbstractController
         $teacher = $registry->getRepository(Teacher::class)->find($id);
         $classess = $registry->getRepository(Classes::class)->findAll();
         if ($teacher == null){
-            $this ->addFlash('Error', 'teacher not found');
+            $this ->addFlash('Error', 'Teacher not found');
             return $this->redirectToRoute('teacher_index');
         }
         return $this->render('teacher/detail.html.twig', [
